@@ -66,7 +66,8 @@ let mode = 'easy_mode'
 
 //creo la variabile del numero massimo delle celle
 let cellNumber = 0;
-let numberArray = [cellNumber - cellNumber + 1];
+const numberArray = [cellNumber - cellNumber + 1];
+
 //creo l'array delle celle bomba
 let cellBomb = [];
 
@@ -100,6 +101,7 @@ buttonPlay.addEventListener('click', function () {
     cellBomb = [];
 
     //creo un ciclo che generi 16 numeri casuali nel range delle celle generate in base alla difficoltà
+    /*
     let k = 0
     while (k < 16) {
         const numberBomb = Math.ceil(Math.random() * cellNumber);
@@ -115,8 +117,28 @@ buttonPlay.addEventListener('click', function () {
 
         k++
     }
+    */
 
+    //creo un una funzione che generi numeri random da un numero minimo ad un massimo
+    function getRandomInteger(min, max) {
+        return bombNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
+    //creo un ciclo per inserire i numeri generati dalla funzione nell'array delle bombe
+    for (let i = 0; i < 16; i++) {
+        let bombNumber = getRandomInteger(1, cellNumber)
+        //se verifico che il numero generato nell'array è già presente ne genero un altro e lo inserisco
+        if (cellBomb.includes(bombNumber)) {
+            cellBomb.push(Math.ceil(Math.random()));
+
+            //altrimenti inserisco direttamente il numero generato nell'array
+        } else {
+            cellBomb.push(bombNumber);
+        }
+
+    }
+
+    console.log(bombNumber);
     console.log(cellBomb);
 
     //creo un ciclo che stampi n volte la cella + il numero generato nel'array creato per i numeri
@@ -144,7 +166,17 @@ buttonPlay.addEventListener('click', function () {
 
         //nel ciclo uso un eventListener che aggiunga o tolga la classe stilizzata in css che attiva o disattiva la casella
         cellSelected.addEventListener('click', function () {
-            cellSelected.classList.toggle('bg_active');
+            //se il numero della cella cliccata è uguale ad uno dei numeri nell'array delle bombe loggo in console bomba e aggiungo la classe bg_bomb
+            if (bombNumber == numberArray[j]) {
+                console.log('bomba');
+                cellSelected.classList.add('bg_bomb');
+
+                //altrimenti loggo in console salvo e aggiungo o tolgo la classe bg_active
+            } else {
+                console.log('salvo');
+                cellSelected.classList.toggle('bg_active');
+            }
+
 
             //loggo il numero corrispondente alla cella in console
             console.log(`Hai cliccato il numero:`, numberArray[j]);
@@ -153,7 +185,8 @@ buttonPlay.addEventListener('click', function () {
 
     }
 
-
 })
+
+
 
 
