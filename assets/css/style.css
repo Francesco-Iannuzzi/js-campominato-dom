@@ -49,6 +49,12 @@ body
     background-color: #00A86B;
 }
 
+#app_main > h1
+{
+    padding: 2rem;
+    color: #F8F4FF;
+}
+
 .container
 {
     display: flex;

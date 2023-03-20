@@ -71,6 +71,15 @@ const numberArray = [cellNumber - cellNumber + 1];
 //creo l'array delle celle bomba
 let cellBomb = [];
 
+//creare una variabile per il game over
+let gameOver = false;
+
+//seleziono l'elemento in DOM dove stampare il risultato
+const result = document.querySelector('#app_main > h1');
+
+//imposto una variabile per il conteggio del risultato
+let resultCount = 1;
+
 
 //creare un eventListenere che richiami il nodo nella DOM del bottone che stampi la griglia
 buttonPlay.addEventListener('click', function () {
@@ -93,6 +102,7 @@ buttonPlay.addEventListener('click', function () {
         mode = 'hard_mode'
 
     }
+
 
     //cancellare gli eventuali elementi già presenti nell'elemento in DOM in cui inserire la griglia
     containerEl.innerHTML = ``;
@@ -119,7 +129,6 @@ buttonPlay.addEventListener('click', function () {
 
     }
 
-    console.log(bombNumber);
     console.log(cellBomb);
 
     //creo un ciclo che stampi n volte la cella + il numero generato nel'array creato per i numeri
@@ -137,7 +146,7 @@ buttonPlay.addEventListener('click', function () {
     }
 
     //seleziono il nodo nella DOM del markup creato(celle)
-    const cellEl = document.querySelectorAll(".cell")
+    const cellEl = document.querySelectorAll(".cell");
 
 
     //creo un ciclo per ciclare tra le celle create con l'eventListener del buttonPlay
@@ -147,20 +156,27 @@ buttonPlay.addEventListener('click', function () {
 
         //nel ciclo uso un eventListener che aggiunga o tolga la classe stilizzata in css che attiva o disattiva la casella
         cellSelected.addEventListener('click', function () {
-            //se il numero della cella cliccata è uguale ad uno dei numeri nell'array delle bombe loggo in console bomba e aggiungo la classe bg_bomb
-            if (bombNumber == numberArray[j]) {
-                console.log('bomba');
-                cellSelected.classList.add('bg_bomb');
 
-                //altrimenti loggo in console salvo e aggiungo o tolgo la classe bg_active
+            //controllo se gameOver è impostato su true non consento altre operazioni
+            if (gameOver === true) {
+
+                //altrimenti se gameOver è su false consento di cliccare
             } else {
-                console.log('salvo');
-                cellSelected.classList.toggle('bg_active');
+
+                //se il numero della cella cliccata è uguale ad uno dei numeri nell'array delle bombe loggo in console bomba e aggiungo la classe bg_bomb
+                if (cellBomb.includes(numberArray[j])) {
+                    console.log(`Hai preso una BOMBA`);
+                    gameOver = true;
+                    cellSelected.classList.add('bg_bomb');
+                    result.innerHTML += ` HAI PERSO`;
+
+                    //altrimenti loggo in console salvo e aggiungo o tolgo la classe bg_active
+                } else {
+                    console.log(`Hai cliccato il numero:`, numberArray[j]);
+                    cellSelected.classList.toggle('bg_active');
+                    result.innerHTML = `Risultato ottenuto: ${resultCount++}`;
+                }
             }
-
-
-            //loggo il numero corrispondente alla cella in console
-            console.log(`Hai cliccato il numero:`, numberArray[j]);
 
         })
 
