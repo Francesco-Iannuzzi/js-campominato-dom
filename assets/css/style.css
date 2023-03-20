@@ -58,7 +58,6 @@ body
 
 .cell
 {
-    /* width: calc(100% / 10); */
     border: 2px solid white;
     aspect-ratio: 1/1;
     display: flex;
@@ -85,4 +84,9 @@ body
 .bg_active
 {
     background-color: #08E8DE;
+}
+
+.bg_bomb
+{
+    background-color: crimson;
 }

@@ -67,6 +67,8 @@ let mode = 'easy_mode'
 //creo la variabile del numero massimo delle celle
 let cellNumber = 0;
 const numberArray = [cellNumber - cellNumber + 1];
+//creo l'array delle celle bomba
+let cellBomb = [];
 
 
 //creare un eventListenere che richiami il nodo nella DOM del bottone che stampi la griglia
@@ -76,17 +78,17 @@ buttonPlay.addEventListener('click', function () {
 
     if (buttonSelect.value === 'easy') {
         console.log(buttonSelect.value);
-        cellNumber = 100;
+        cellNumber = 100 - cellBomb.length;
         mode = 'easy_mode'
 
     } else if (buttonSelect.value === 'normal') {
         console.log(buttonSelect.value);
-        cellNumber = 81;
+        cellNumber = 81 - cellBomb.length;
         mode = 'normal_mode'
 
     } else if (buttonSelect.value === 'hard') {
         console.log(buttonSelect.value);
-        cellNumber = 49;
+        cellNumber = 49 - cellBomb.length;
         mode = 'hard_mode'
 
     }
@@ -107,6 +109,17 @@ buttonPlay.addEventListener('click', function () {
         containerEl.insertAdjacentHTML("beforeend", cellMarkup);
 
     }
+
+    //svuoto l'array delle bombe per far in modo da avere sempre solo 16 numeri nell'array
+    cellBomb = [];
+
+    //creo un ciclo che generi 16 numeri casuali nel range delle celle generate in base alla difficoltà
+    for (let k = 0; k < 16; k++) {
+        const numberBomb = Math.ceil(Math.random()* cellNumber);
+        cellBomb.push(numberBomb);  
+    }
+
+    console.log(cellBomb);
 
     //seleziono il nodo nella DOM del markup creato(celle)
     const cellEl = document.querySelectorAll(".cell")
