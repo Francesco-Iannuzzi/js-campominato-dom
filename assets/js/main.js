@@ -171,31 +171,31 @@ buttonPlay.addEventListener('click', function () {
         //nel ciclo uso un eventListener che aggiunga o tolga la classe stilizzata in css che attiva o disattiva la casella
         cellSelected.addEventListener('click', function () {
 
+            //controllo se il conteggio delle celle cliccate è uguale al numero di celle meno il numero di celle dell'array delle bombe e indico che ha vinto
             if (resultCount == cellNumber - 16) {
                 result.innerHTML = `HAI VINTO`;
 
+                //altrimenti controllo se gameOver è impostato su true
+            } else if (gameOver === true) {
+                //non consento altre operazioni nelle celle
+
             } else {
-                //controllo se gameOver è impostato su true non consento altre operazioni nelle celle
-                if (gameOver === true) {
+                //se il numero della cella cliccata è uguale ad uno dei numeri nell'array delle bombe loggo in console bomba e aggiungo la classe bg_bomb
+                if (cellBomb.includes(numberArray[j])) {
+                    console.log(`Hai preso una BOMBA`);
+                    gameOver = true;
+                    cellSelected.classList.add('bg_bomb');
+                    result.innerHTML = `HAI PERSO`;
 
-                    //altrimenti se gameOver è su false consento di cliccare
+                    //altrimenti loggo in console salvo e aggiungo o tolgo la classe bg_active
                 } else {
-
-                    //se il numero della cella cliccata è uguale ad uno dei numeri nell'array delle bombe loggo in console bomba e aggiungo la classe bg_bomb
-                    if (cellBomb.includes(numberArray[j])) {
-                        console.log(`Hai preso una BOMBA`);
-                        gameOver = true;
-                        cellSelected.classList.add('bg_bomb');
-                        result.innerHTML = `HAI PERSO`;
-
-                        //altrimenti loggo in console salvo e aggiungo o tolgo la classe bg_active
-                    } else {
-                        console.log(`Hai cliccato il numero:`, numberArray[j]);
-                        cellSelected.classList.toggle('bg_active');
-                        result.innerHTML = `Risultato ottenuto: ${resultCount++}`;
-                    }
+                    console.log(`Hai cliccato il numero:`, numberArray[j]);
+                    cellSelected.classList.toggle('bg_active');
+                    result.innerHTML = `Risultato ottenuto: ${resultCount++}`;
                 }
+
             }
+
 
         })
 
