@@ -84,6 +84,18 @@ let resultCount = 1;
 //creare un eventListenere che richiami il nodo nella DOM del bottone che stampi la griglia
 buttonPlay.addEventListener('click', function () {
 
+    //reimposto il gameOver su false per tornare a giocare anche dopo aver perso
+    gameOver = false;
+
+    //reimposto il conteggio dei click 
+    resultCount = 1;
+
+    //cancellare gli eventuali elementi già presenti nell'elemento in DOM in cui inserire la griglia
+    containerEl.innerHTML = ``;
+
+    //svuoto l'array delle bombe per far in modo da avere sempre solo 16 numeri nell'array
+    cellBomb = [];
+
     //Bonus:
 
     if (buttonSelect.value === 'easy') {
@@ -104,11 +116,6 @@ buttonPlay.addEventListener('click', function () {
     }
 
 
-    //cancellare gli eventuali elementi già presenti nell'elemento in DOM in cui inserire la griglia
-    containerEl.innerHTML = ``;
-
-    //svuoto l'array delle bombe per far in modo da avere sempre solo 16 numeri nell'array
-    cellBomb = [];
 
     //creo un una funzione che generi numeri random da un numero minimo ad un massimo
     function getRandomInteger(min, max) {
@@ -116,9 +123,11 @@ buttonPlay.addEventListener('click', function () {
     }
 
     //creo un ciclo per inserire i numeri generati dalla funzione nell'array delle bombe
-    for (let i = 0; i < 16; i++) {
-        let bombNumber = getRandomInteger(1, cellNumber)
-        //se verifico che il numero generato nell'array è già presente ne genero un altro e lo inserisco
+    let i = 0;
+    while (i < 16) {
+
+        let bombNumber = getRandomInteger(1, cellNumber);
+
         if (cellBomb.includes(bombNumber)) {
             cellBomb.push(Math.ceil(Math.random()));
 
@@ -127,6 +136,7 @@ buttonPlay.addEventListener('click', function () {
             cellBomb.push(bombNumber);
         }
 
+        i++;
     }
 
     console.log(cellBomb);
@@ -168,7 +178,7 @@ buttonPlay.addEventListener('click', function () {
                     console.log(`Hai preso una BOMBA`);
                     gameOver = true;
                     cellSelected.classList.add('bg_bomb');
-                    result.innerHTML += ` HAI PERSO`;
+                    result.innerHTML = ` HAI PERSO`;
 
                     //altrimenti loggo in console salvo e aggiungo o tolgo la classe bg_active
                 } else {
