@@ -1,0 +1,88 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    background-color: #00A86B;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#app_header
+{
+    background-color: #F8F4FF;
+    height: 100px;
+    line-height: 100px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5rem;
+}
+
+.logo > h1
+{
+    font-size: 3rem;
+}
+
+.btn_play, .btn_select
+{
+    padding: 0.5rem 1rem;
+    background-color: #FFBF00;
+    color: #293133;
+    font-size: 1rem;
+    border-radius: 2rem;
+    border: 0;
+}
+
+
+.btn_play:hover, .btn_select:hover
+{
+    border: 2px solid;
+    background-color: #ffd044;
+}
+
+#app_main
+{
+    background-color: #00A86B;
+}
+
+.container
+{
+    display: flex;
+    flex-flow: row wrap;
+    width: 80%;
+    margin: 5rem auto;
+}
+
+.cell
+{
+    /* width: calc(100% / 10); */
+    border: 2px solid white;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.easy_mode
+{
+    width: calc(100% / 10);
+}
+
+.normal_mode
+{
+    width: calc(100% / 9);
+}
+
+.hard_mode
+{
+    width: calc(100% / 7);
+}
+
+.bg_active
+{
+    background-color: #08E8DE;
+}
