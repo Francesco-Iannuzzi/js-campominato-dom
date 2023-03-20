@@ -78,17 +78,17 @@ buttonPlay.addEventListener('click', function () {
 
     if (buttonSelect.value === 'easy') {
         console.log(buttonSelect.value);
-        cellNumber = 100 - cellBomb.length;
+        cellNumber = 100;
         mode = 'easy_mode'
 
     } else if (buttonSelect.value === 'normal') {
         console.log(buttonSelect.value);
-        cellNumber = 81 - cellBomb.length;
+        cellNumber = 81;
         mode = 'normal_mode'
 
     } else if (buttonSelect.value === 'hard') {
         console.log(buttonSelect.value);
-        cellNumber = 49 - cellBomb.length;
+        cellNumber = 49;
         mode = 'hard_mode'
 
     }
@@ -96,8 +96,28 @@ buttonPlay.addEventListener('click', function () {
     //cancellare gli eventuali elementi già presenti nell'elemento in DOM in cui inserire la griglia
     containerEl.innerHTML = ``;
 
+    //svuoto l'array delle bombe per far in modo da avere sempre solo 16 numeri nell'array
+    cellBomb = [];
+
+    //creo un ciclo che generi 16 numeri casuali nel range delle celle generate in base alla difficoltà
+    for (let k = 0; k < 16; k++) {
+        const numberBomb = Math.ceil(Math.random() * cellNumber);
+
+        //se verifico che il numero generato nell'array è già presente non faccio niente
+        if (cellBomb.includes(numberBomb)) {
+
+            //altrimenti inserisco il numero generato nell'array
+        } else {
+            cellBomb.push(numberBomb);
+        }
+
+    }
+
+
+    console.log(cellBomb);
+
     //creo un ciclo che stampi n volte la cella + il numero generato nel'array creato per i numeri
-    for (let i = 0; i < cellNumber; i++) {
+    for (let i = 0; i < cellNumber - cellBomb.length; i++) {
         let cellMarkup = `<div class="cell ${mode} ">${numberArray[i]}</div>`;
         //console.log(cellMarkup);
 
@@ -109,17 +129,6 @@ buttonPlay.addEventListener('click', function () {
         containerEl.insertAdjacentHTML("beforeend", cellMarkup);
 
     }
-
-    //svuoto l'array delle bombe per far in modo da avere sempre solo 16 numeri nell'array
-    cellBomb = [];
-
-    //creo un ciclo che generi 16 numeri casuali nel range delle celle generate in base alla difficoltà
-    for (let k = 0; k < 16; k++) {
-        const numberBomb = Math.ceil(Math.random()* cellNumber);
-        cellBomb.push(numberBomb);  
-    }
-
-    console.log(cellBomb);
 
     //seleziono il nodo nella DOM del markup creato(celle)
     const cellEl = document.querySelectorAll(".cell")
