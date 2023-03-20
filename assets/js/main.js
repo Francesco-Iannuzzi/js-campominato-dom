@@ -96,6 +96,9 @@ buttonPlay.addEventListener('click', function () {
     //svuoto l'array delle bombe per far in modo da avere sempre solo 16 numeri nell'array
     cellBomb = [];
 
+    //resetto l'elemento in DOM in cui inserire il risultato
+    result.innerHTML = `Risultato ottenuto:`
+
     //Bonus:
 
     if (buttonSelect.value === 'easy') {
@@ -128,6 +131,7 @@ buttonPlay.addEventListener('click', function () {
 
         let bombNumber = getRandomInteger(1, cellNumber);
 
+        //se il numero generato è già compreso nell'array ne generono un altro
         if (cellBomb.includes(bombNumber)) {
             cellBomb.push(Math.ceil(Math.random()));
 
