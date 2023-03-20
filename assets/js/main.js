@@ -100,25 +100,6 @@ buttonPlay.addEventListener('click', function () {
     //svuoto l'array delle bombe per far in modo da avere sempre solo 16 numeri nell'array
     cellBomb = [];
 
-    //creo un ciclo che generi 16 numeri casuali nel range delle celle generate in base alla difficoltà
-    /*
-    let k = 0
-    while (k < 16) {
-        const numberBomb = Math.ceil(Math.random() * cellNumber);
-
-        //se verifico che il numero generato nell'array è già presente ne genero un altro e lo inserisco
-        if (cellBomb.includes(numberBomb)) {
-            cellBomb.push(Math.ceil(Math.random()));
-
-            //altrimenti inserisco direttamente il numero generato nell'array
-        } else {
-            cellBomb.push(numberBomb);
-        }
-
-        k++
-    }
-    */
-
     //creo un una funzione che generi numeri random da un numero minimo ad un massimo
     function getRandomInteger(min, max) {
         return bombNumber = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -186,7 +167,3 @@ buttonPlay.addEventListener('click', function () {
     }
 
 })
-
-
-
-
