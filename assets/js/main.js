@@ -66,7 +66,7 @@ let mode = 'easy_mode'
 
 //creo la variabile del numero massimo delle celle
 let cellNumber = 0;
-const numberArray = [cellNumber - cellNumber + 1];
+let numberArray = [cellNumber - cellNumber + 1];
 //creo l'array delle celle bomba
 let cellBomb = [];
 
@@ -100,24 +100,27 @@ buttonPlay.addEventListener('click', function () {
     cellBomb = [];
 
     //creo un ciclo che generi 16 numeri casuali nel range delle celle generate in base alla difficoltà
-    for (let k = 0; k < 16; k++) {
+    let k = 0
+    while (k < 16) {
         const numberBomb = Math.ceil(Math.random() * cellNumber);
 
-        //se verifico che il numero generato nell'array è già presente non faccio niente
+        //se verifico che il numero generato nell'array è già presente ne genero un altro e lo inserisco
         if (cellBomb.includes(numberBomb)) {
+            cellBomb.push(Math.ceil(Math.random()));
 
-            //altrimenti inserisco il numero generato nell'array
+            //altrimenti inserisco direttamente il numero generato nell'array
         } else {
             cellBomb.push(numberBomb);
         }
 
+        k++
     }
 
 
     console.log(cellBomb);
 
     //creo un ciclo che stampi n volte la cella + il numero generato nel'array creato per i numeri
-    for (let i = 0; i < cellNumber - cellBomb.length; i++) {
+    for (let i = 0; i < cellNumber; i++) {
         let cellMarkup = `<div class="cell ${mode} ">${numberArray[i]}</div>`;
         //console.log(cellMarkup);
 
@@ -141,7 +144,7 @@ buttonPlay.addEventListener('click', function () {
 
         //nel ciclo uso un eventListener che aggiunga o tolga la classe stilizzata in css che attiva o disattiva la casella
         cellSelected.addEventListener('click', function () {
-            cellSelected.classList.toggle('bg_active')
+            cellSelected.classList.toggle('bg_active');
 
             //loggo il numero corrispondente alla cella in console
             console.log(`Hai cliccato il numero:`, numberArray[j]);
@@ -150,4 +153,7 @@ buttonPlay.addEventListener('click', function () {
 
     }
 
+
 })
+
+
