@@ -172,7 +172,7 @@ buttonPlay.addEventListener('click', function () {
         cellSelected.addEventListener('click', function () {
 
             //controllo se il conteggio delle celle cliccate è uguale al numero di celle meno il numero di celle dell'array delle bombe e indico che ha vinto
-            if (resultCount == cellNumber - 16) {
+            if (resultCount == cellNumber - cellBomb.length) {
                 result.innerHTML = `HAI VINTO`;
 
                 //altrimenti controllo se gameOver è impostato su true
